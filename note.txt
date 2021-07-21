@@ -3,6 +3,7 @@ PROJECT OBJECTIVES
 - different user accounts can register & login 
 - create, view, edit, delete posts
 - upload images to ipfs
+- Tip ether to post creators
 - pages include: 
     general news feed
     create, update, delete post
