@@ -2,9 +2,7 @@
 A Decentralized social media platform on the Ethereum Blockchain!
 
 ## Description
-Users will be able to create posts; stored on the blockchain. 
-View their posts and posts created by toher users.
-Upload pictures to a decentralized file storage, IPFS.
+Users will be able to create posts; stored on the blockchain, view their posts and posts created by other users, and also upload pictures to a decentralized file storage, IPFS.
 
 ## Installation
 * Clone the repo
