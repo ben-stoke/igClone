@@ -25,4 +25,3 @@ You are welcome to contribute, or suggest changes to this project. Just send an 
 * Ethereum
 * Web3Js
 * Metamask
->>>>>>> 1b713721189bc5e8402ad939dca23e3996b5e365
