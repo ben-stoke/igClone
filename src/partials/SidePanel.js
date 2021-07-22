@@ -22,7 +22,7 @@ const SidePanel = () => {
                         </Link>
                     </li>
                     <li className="panel-close">
-                        <Link className="side-panel-toggle" to="">
+                        <Link className="side-panel-toggle">
                             <i className="ti-close" />
                         </Link>
                     </li>

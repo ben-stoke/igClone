@@ -7,6 +7,7 @@ contract Decentragram {
     // this works like a database on the blockchain; by storing data.
     mapping(uint256 => Image) public images;
 
+    // used to define kinda like columns in the images table.
     struct Image {
         uint256 id;
         string hash;

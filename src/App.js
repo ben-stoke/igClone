@@ -14,16 +14,23 @@ function App() {
   const [AcctAuth, setAcctAuth] = useState(null);
   const [decentragram, setDecentragram] = useState(null);
   const [ImagesCount, setImagesCount] = useState([]);
+  const [Images, setImages] = useState([]);
   const [Loading, setLoading] = useState(true);
+  const [sideNavToggle, setsideNavToggle] = useState("side-nav-toggle");
   const data = {
     AcctAuth,
     Loading,
+    sideNavToggle,
+    decentragram
   };
 
   useEffect(async () => {
     await lib.loadWeb3();
     await loadBlockchainData();
+    // setsideNavToggle("null");
   }, [AcctAuth]);
+
+  
 
   async function loadBlockchainData() {
     const web3 = window.web3;
@@ -39,7 +46,7 @@ function App() {
     if (!networkData) {
       window.alert("Decentragram contract not deployed to detected network.");
     }
-
+    // FETCH THE CONTRACT
     const _decentragram = new web3.eth.Contract(
       Decentragram.abi,
       networkData.address
@@ -48,7 +55,14 @@ function App() {
 
     const imagesCount = await _decentragram.methods.imageCount().call();
     setImagesCount(imagesCount);
-
+    
+      // Load images
+      for (var i = 0; i < imagesCount; i++) {
+        let image = await _decentragram.methods.images(i).call()
+        
+        setImages(Images.push(image))
+      }
+      console.log(Images)
     if(accounts && _decentragram && imagesCount){
       setLoading(false);
     }
@@ -67,18 +81,6 @@ function App() {
   });
 
   
-  // var captureFile = e => {
-
-  //   e.preventDefault()
-  //   const file = e.target.files[0]
-  //   const reader = new window.FileReader()
-  //   reader.readAsArrayBuffer(file)
-
-  //   reader.onloadend = () => {
-  //     this.setState({ buffer: Buffer(reader.result) })
-  //     console.log('buffer', this.state.buffer)
-  //   }
-  // }
 
   return (
     <Router>
@@ -93,7 +95,7 @@ function App() {
                 <Overview data={data} />
               </Route>
               <Route exact path="/new-image">
-                <NewImage data={data} />
+                <NewImage data={data} onLoading={setLoading} />
               </Route>
             </Switch>
             <Footer />

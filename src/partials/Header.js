@@ -4,7 +4,7 @@ import lib from "../config/lib";
 // import $ from 'jquery';
 
 const Header = (e) => {
-  const [sideNavToggle, setsideNavToggle] = useState("side-nav-toggle");
+  const { sideNavToggle } = e.data;
   let data = e.data;
   // console.log(data);
 
@@ -13,7 +13,7 @@ const Header = (e) => {
       <div className="header-container">
         <ul className="nav-left">
           <li>
-            <Link className={sideNavToggle} to="javascript:void(0);">
+            <Link className={sideNavToggle} >
               <i className="ti-view-grid" />
             </Link>
           </li>
