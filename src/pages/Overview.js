@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 
-const Overview = (data) => {
-  const { Loading } = data.data;
-
+const Overview = ({data, images}) => {
+  const { Loading } = data;
   
 
-  // console.log(data);
+  console.log(images);
 
   return (
     <div className="main-content">
@@ -61,42 +60,8 @@ const Overview = (data) => {
                     className="list-info overflow-y-auto relative scrollable"
                     style={{ maxHeight: 340 }}
                   >
-                    <li className="border bottom mrg-btm-10">
-                      <div className="pdd-vertical-10">
-                        <span className="thumb-img bg-primary">
-                          <span className="text-white">JH</span>
-                        </span>
-                        <div className="info">
-                          <Link to="#" className="text-link">
-                            <span className="title">
-                              <b className="font-size-15">Jordan Hurst</b>
-                            </span>
-                          </Link>
-                          <span className="sub-title">5 mins ago</span>
-                        </div>
-                        <div className="mrg-top-10">
-                          <p className="no-mrg-btm">
-                            Remember, a Jedi can feel the Force flowing through
-                            him. You mean it controls your actions? Partially.
-                          </p>
-                        </div>
-                        <ul className="feed-action">
-                          <li>
-                            <Link to="#">
-                              <i className="ti-heart text-danger pdd-right-5" />
-                              <span>168</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                              <i className="ti-comments text-primary pdd-right-5" />
-                              <span>18</span>
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className="border bottom mrg-btm-10">
+                    {images.map((e,key) => (
+                    <li className="border bottom mrg-btm-10" key={key}>
                       <div className="pdd-vertical-10">
                         <span className="thumb-img bg-success">
                           <span className="text-white">JW</span>
@@ -104,15 +69,24 @@ const Overview = (data) => {
                         <div className="info">
                           <Link to="#" className="text-link">
                             <span className="title">
-                              <b className="font-size-15">Jennifer Watkins</b>
+                              <b className="font-size-15">{e.author}</b>
                             </span>
                           </Link>
                           <span className="sub-title">5 mins ago</span>
                         </div>
                         <div className="mrg-top-15">
                           <p>
-                            What good's a reward if you ain't around to use it?
+                            {e.description}
                           </p>
+                        </div>
+                        <div className="mrg-top-15 m-auto">
+                          <img
+                          className=""
+                            src={`https://ipfs.infura.io/ipfs/${e.hash}`}
+                            width={117}
+                            height={117}
+                            alt="man"
+                          />
                         </div>
                         <ul className="feed-action">
                           <li>
@@ -130,42 +104,10 @@ const Overview = (data) => {
                         </ul>
                       </div>
                     </li>
-                    <li className="border bottom">
-                      <div className="pdd-vertical-10">
-                        <span className="thumb-img bg-warning">
-                          <span className="text-white">MB</span>
-                        </span>
-                        <div className="info">
-                          <Link to="#" className="text-link">
-                            <span className="title">
-                              <b className="font-size-15">Michael Birch</b>
-                            </span>
-                          </Link>
-                          <span className="sub-title">5 mins ago</span>
-                        </div>
-                        <div className="mrg-top-15">
-                          <p>
-                            What good's a reward if you ain't around to use it?
-                            Besides, attacking that battle station ain't my idea
-                            of courage.
-                          </p>
-                        </div>
-                        <ul className="feed-action">
-                          <li>
-                            <Link to="#">
-                              <i className="ti-heart text-danger pdd-right-5" />
-                              <span>168</span>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link to="#">
-                              <i className="ti-comments text-primary pdd-right-5" />
-                              <span>18</span>
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
+                    ))
+                    }
+
+
                   </ul>
                 </div>
               </div>

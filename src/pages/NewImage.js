@@ -56,7 +56,7 @@ const NewImage = ({ data, onLoading }) => {
 
     //ADD FILE TO IPFS
     let res = await ipfs.add(imgBuffer);
-    onLoading(true);
+    // onLoading(true);
     console.log( res);
 
     
@@ -66,8 +66,13 @@ const NewImage = ({ data, onLoading }) => {
 
         // TO CHECK IF WRITING TO BLOCKCHAIN IS SUCCESSFULL
         updateImage.on("transactionHash", (hash) => { 
-          onLoading(false);
+          console.log('Hash saved successfully...')
+          console.log(hash)
+          // onLoading(false);
         });
+        updateImage.once('imageCreated', (err, res) => {
+          console.log(res)
+        })
   };
 
   return (

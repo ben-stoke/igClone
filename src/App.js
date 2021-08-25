@@ -21,7 +21,7 @@ function App() {
     AcctAuth,
     Loading,
     sideNavToggle,
-    decentragram
+    decentragram,
   };
 
   useEffect(async () => {
@@ -29,8 +29,6 @@ function App() {
     await loadBlockchainData();
     // setsideNavToggle("null");
   }, [AcctAuth]);
-
-  
 
   async function loadBlockchainData() {
     const web3 = window.web3;
@@ -42,6 +40,7 @@ function App() {
     // Network ID
     const networkId = await web3.eth.net.getId();
     const networkData = Decentragram.networks[networkId];
+    console.log(networkData)
 
     if (!networkData) {
       window.alert("Decentragram contract not deployed to detected network.");
@@ -55,15 +54,16 @@ function App() {
 
     const imagesCount = await _decentragram.methods.imageCount().call();
     setImagesCount(imagesCount);
-    
-      // Load images
-      for (var i = 0; i < imagesCount; i++) {
-        let image = await _decentragram.methods.images(i).call()
-        
-        setImages(Images.push(image))
-      }
-      console.log(Images)
-    if(accounts && _decentragram && imagesCount){
+
+    // LOAD IMAGES FROM BLOCKCHAIN
+    for (var i = 0; i < imagesCount; i++) {
+      let image = await _decentragram.methods.images(i).call();
+      let _Images = Images;
+      _Images.push(image);
+      setImages(_Images);
+    }
+    console.log(Images);
+    if (accounts && _decentragram && imagesCount) {
       setLoading(false);
     }
   }
@@ -79,9 +79,7 @@ function App() {
   window.ethereum.on("accountsChanged", function (accounts) {
     setAcctAuth(accounts[0]);
   });
-
-  
-
+// console.log(Images)
   return (
     <Router>
       <div className="app">
@@ -92,7 +90,7 @@ function App() {
             <SidePanel />
             <Switch>
               <Route exact path="/">
-                <Overview data={data} />
+                <Overview data={data} images={Images} />
               </Route>
               <Route exact path="/new-image">
                 <NewImage data={data} onLoading={setLoading} />

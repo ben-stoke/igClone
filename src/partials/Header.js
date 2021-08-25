@@ -293,7 +293,7 @@ const Header = (e) => {
             </ul>
           </li>
           <li>
-            <Link className="side-panel-toggle" to="javascript:void(0);">
+            <Link className="side-panel-toggle" to="#">
               <i className="ti-align-right" />
             </Link>
           </li>
